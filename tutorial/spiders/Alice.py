@@ -6,6 +6,7 @@ from scrapy.selector import Selector
 from scrapy.http import HtmlResponse
 i = 0
 j = 0
+limit = 6000
 #numbers = open("D:\\Python\tutorial\number.txt",'r')
 #i = numbers.read
 #numbers.close
@@ -39,7 +40,8 @@ class AliceSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):	
-        if i < 50:
+        global limit
+        if i < limit:
             savefile = "savelinks.txt"
             updatefile = 'update.txt'
             listofVB = response.css('h3.title_news a.icon_commend::attr(href)').extract()
@@ -69,7 +71,8 @@ class AliceSpider(scrapy.Spider):
         
     def parse_VB(self, response):
         global i
-        if i < 50:
+        global limit
+        if i < limit:
         #VB_container = response.css('div.cldivContentDocVN').extract()
         #filee = response.css("title::text").extract_first().strip()
         #filename = str(filee)+".txt"
